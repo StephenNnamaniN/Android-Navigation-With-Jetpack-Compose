@@ -5,6 +5,7 @@ enum class MeditationScreen {
     MainScreen,
     AboutScreen,
     SettingScreen,
+    ProfileScreen,
     LoginScreen,
     CreateAccountScreen;
 
@@ -14,6 +15,7 @@ enum class MeditationScreen {
             SplashScreen.name -> SplashScreen
             MainScreen.name -> MainScreen
             AboutScreen.name -> AboutScreen
+            ProfileScreen.name -> ProfileScreen
             SettingScreen.name -> SettingScreen
             LoginScreen.name -> LoginScreen
             CreateAccountScreen.name -> CreateAccountScreen

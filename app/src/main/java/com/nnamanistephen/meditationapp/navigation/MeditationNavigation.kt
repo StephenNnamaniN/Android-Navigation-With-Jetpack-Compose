@@ -9,6 +9,7 @@ import com.nnamanistephen.meditationapp.Screen.createAccount.CreateAccountScreen
 import com.nnamanistephen.meditationapp.Screen.login.LoginScreen
 import com.nnamanistephen.meditationapp.Screen.home.MeditationAppMain
 import com.nnamanistephen.meditationapp.Screen.home.MeditationAppSplash
+import com.nnamanistephen.meditationapp.Screen.profile.ProfileScreen
 import com.nnamanistephen.meditationapp.Screen.settings.SettingsScreen
 
 @Composable
@@ -22,6 +23,9 @@ fun MeditationNavigation(){
 
         composable(MeditationScreen.MainScreen.name){
             MeditationAppMain(navController = navController)
+        }
+        composable(MeditationScreen.ProfileScreen.name){
+            ProfileScreen(navController = navController)
         }
         composable(MeditationScreen.AboutScreen.name){
             AboutScreen(navController = navController)

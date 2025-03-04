@@ -1,4 +1,4 @@
-package com.nnamanistephen.meditationapp.Screen.settings
+package com.nnamanistephen.meditationapp.Screen.profile
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -12,16 +12,16 @@ import com.nnamanistephen.meditationapp.component.FABTab
 import com.nnamanistephen.meditationapp.component.GeneralTopBar
 
 @Composable
-fun SettingsScreen(navController: NavController){
+fun ProfileScreen(navController: NavController){
     Scaffold(topBar = {
-        GeneralTopBar(title = "Settings", navController = navController)
+        GeneralTopBar(title = "Profile", navController = navController)
     },
         bottomBar = {
             BottomNavigationBar(navController = navController)
         }) {innerPadding ->
         //Main content goes here
         Surface(modifier = Modifier.padding(innerPadding)) {
-            Text(text = "Let's setup...")
+            Text(text = "Welcome to your profile...")
         }
     }
 }

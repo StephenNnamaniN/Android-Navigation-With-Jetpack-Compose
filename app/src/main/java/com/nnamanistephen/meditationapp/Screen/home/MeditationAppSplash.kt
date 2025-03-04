@@ -23,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
 import com.nnamanistephen.meditationapp.R
 import com.nnamanistephen.meditationapp.navigation.MeditationScreen
 import kotlinx.coroutines.delay
@@ -40,7 +41,10 @@ fun MeditationAppSplash(navController: NavController){
             }
         ))
         delay(2000L)
-        navController.navigate(MeditationScreen.LoginScreen.name)
+        if (FirebaseAuth.getInstance().currentUser?.email.isNullOrEmpty()){
+            navController.navigate(MeditationScreen.LoginScreen.name)
+        }
+        navController.navigate(MeditationScreen.MainScreen.name)
     })
     Surface(modifier = Modifier
         .padding(15.dp)
