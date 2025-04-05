@@ -1,6 +1,5 @@
-package com.nnamanistephen.meditationapp.component
+package com.nnamanistephen.meditationapp.presentation.component
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +35,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SegmentedButtonDefaults.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -59,12 +57,15 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.firebase.auth.FirebaseAuth
 import com.nnamanistephen.meditationapp.R
+import com.nnamanistephen.meditationapp.domain.usecases.SortType
 import com.nnamanistephen.meditationapp.navigation.MeditationScreen
-import java.io.Reader
+import com.nnamanistephen.meditationapp.presentation.user.UserEvent
+import com.nnamanistephen.meditationapp.presentation.user.UserViewModel
 
 // Re-usable design elements
 @Preview
@@ -87,7 +88,8 @@ fun GeneralTopBar(
     title: String,
     icon: ImageVector? = null,
     onBackArrowPressed: () -> Unit = {},
-    navController: NavController
+    navController: NavController,
+    userViewModel: UserViewModel = hiltViewModel()
 ){
     var expanded by remember {
         mutableStateOf(false)
@@ -111,12 +113,12 @@ fun GeneralTopBar(
             DropdownMenu(expanded = expanded,
                     onDismissRequest = {
                         expanded = false }) {
-                DropdownMenuItem(text = { Text(text = "Profile")},
-                    onClick = { /*TODO*/ })
-                DropdownMenuItem(text = { Text(text = "About Us")},
-                    onClick = { /*TODO*/ })
-                DropdownMenuItem(text = { Text(text = "Settings")},
-                    onClick = { /*TODO*/ })
+                DropdownMenuItem(text = { Text(text = "Sort by Firstname")},
+                    onClick = { userViewModel.onEvent(UserEvent.SortUser(SortType.FIRST_NAME)) })
+                DropdownMenuItem(text = { Text(text = "Sort by LastName")},
+                    onClick = { userViewModel.onEvent(UserEvent.SortUser(SortType.LAST_NAME)) })
+                DropdownMenuItem(text = { Text(text = "Sort by Gender")},
+                    onClick = { userViewModel.onEvent(UserEvent.SortUser(SortType.GENDER)) })
                 DropdownMenuItem(text = { Text(text = "Privacy policy")},
                     onClick = { /*TODO*/ })
                 DropdownMenuItem(text = { Text(text = "Logout")},
@@ -129,16 +131,16 @@ fun GeneralTopBar(
         })
 }
 
-@Composable
-fun FABTab(onTap: () -> Unit){
-    FloatingActionButton(onClick = { /*TODO*/ },
-        shape = CircleShape,
-        containerColor = MaterialTheme.colorScheme.background) {
-        Icon(imageVector = Icons.Filled.Search,
-            contentDescription = "Search icon",
-            tint = MaterialTheme.colorScheme.onBackground)
-    }
-}
+//@Composable
+//fun FABTab(onTap: () -> Unit){
+//    FloatingActionButton(onClick = { /*TODO*/ },
+//        shape = CircleShape,
+//        containerColor = MaterialTheme.colorScheme.background) {
+//        Icon(imageVector = Icons.Filled.Search,
+//            contentDescription = "Search icon",
+//            tint = MaterialTheme.colorScheme.onBackground)
+//    }
+//}
 
 sealed class BottomNavItems(
     val title: String,
@@ -147,7 +149,7 @@ sealed class BottomNavItems(
     val route: String)
 {
     object Home: BottomNavItems("Home", Icons.Filled.Home, Icons.Outlined.Home, MeditationScreen.MainScreen.name)
-    object Profile: BottomNavItems("Profile", Icons.Filled.Person, Icons.Outlined.Person, MeditationScreen.ProfileScreen.name)
+    object Profile: BottomNavItems("Profile", Icons.Filled.Person, Icons.Outlined.Person, "${MeditationScreen.ProfileScreen.name}/{userId}")
     object About: BottomNavItems("About", Icons.Filled.Info, Icons.Outlined.Info, MeditationScreen.AboutScreen.name)
     object Settings: BottomNavItems("Settings", Icons.Filled.Settings, Icons.Outlined.Settings, MeditationScreen.SettingScreen.name)
 }
@@ -245,7 +247,7 @@ fun PasswordInput(passwordState: MutableState<String>,
         enabled = enabled, keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password, imeAction = imeAction),
         visualTransformation = visualTransformation,
-        trailingIcon = {PasswordVisibility(passwordVisibility =passwordVisibility)},
+        trailingIcon = { PasswordVisibility(passwordVisibility =passwordVisibility) },
         keyboardActions = onAction)
 }
 

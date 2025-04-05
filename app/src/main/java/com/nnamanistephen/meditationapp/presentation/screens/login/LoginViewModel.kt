@@ -1,4 +1,4 @@
-package com.nnamanistephen.meditationapp.Screen.login
+package com.nnamanistephen.meditationapp.presentation.screens.login
 
 import android.util.Log
 import androidx.lifecycle.LiveData

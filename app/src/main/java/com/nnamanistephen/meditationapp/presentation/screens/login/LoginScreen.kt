@@ -1,4 +1,4 @@
-package com.nnamanistephen.meditationapp.Screen.login
+package com.nnamanistephen.meditationapp.presentation.screens.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,10 +26,10 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.nnamanistephen.meditationapp.component.EmailInput
-import com.nnamanistephen.meditationapp.component.MeditationAppLogo
-import com.nnamanistephen.meditationapp.component.PasswordInput
-import com.nnamanistephen.meditationapp.component.SubmitButton
+import com.nnamanistephen.meditationapp.presentation.component.EmailInput
+import com.nnamanistephen.meditationapp.presentation.component.MeditationAppLogo
+import com.nnamanistephen.meditationapp.presentation.component.PasswordInput
+import com.nnamanistephen.meditationapp.presentation.component.SubmitButton
 import com.nnamanistephen.meditationapp.navigation.MeditationScreen
 
 @Composable

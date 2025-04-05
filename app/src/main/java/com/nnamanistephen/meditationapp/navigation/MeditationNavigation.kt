@@ -1,16 +1,18 @@
 package com.nnamanistephen.meditationapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.nnamanistephen.meditationapp.Screen.about.AboutScreen
-import com.nnamanistephen.meditationapp.Screen.createAccount.CreateAccountScreen
-import com.nnamanistephen.meditationapp.Screen.login.LoginScreen
-import com.nnamanistephen.meditationapp.Screen.home.MeditationAppMain
-import com.nnamanistephen.meditationapp.Screen.home.MeditationAppSplash
-import com.nnamanistephen.meditationapp.Screen.profile.ProfileScreen
-import com.nnamanistephen.meditationapp.Screen.settings.SettingsScreen
+import androidx.navigation.navArgument
+import com.nnamanistephen.meditationapp.presentation.screens.about.AboutScreen
+import com.nnamanistephen.meditationapp.presentation.screens.createAccount.CreateAccountScreen
+import com.nnamanistephen.meditationapp.presentation.screens.login.LoginScreen
+import com.nnamanistephen.meditationapp.presentation.user.MeditationAppMain
+import com.nnamanistephen.meditationapp.presentation.screens.home.MeditationAppSplash
+import com.nnamanistephen.meditationapp.presentation.userdetails.ProfileScreen
+import com.nnamanistephen.meditationapp.presentation.screens.settings.SettingsScreen
 
 @Composable
 fun MeditationNavigation(){
@@ -24,8 +26,13 @@ fun MeditationNavigation(){
         composable(MeditationScreen.MainScreen.name){
             MeditationAppMain(navController = navController)
         }
-        composable(MeditationScreen.ProfileScreen.name){
-            ProfileScreen(navController = navController)
+        composable("${MeditationScreen.ProfileScreen.name}/{userId}",
+            arguments = listOf(navArgument("userId"){
+                type = NavType.IntType
+            })
+        ){ backStackEntry ->
+            val userId = backStackEntry.arguments?.getInt("userId") ?: return@composable
+            ProfileScreen(navController = navController, userId = userId)
         }
         composable(MeditationScreen.AboutScreen.name){
             AboutScreen(navController = navController)

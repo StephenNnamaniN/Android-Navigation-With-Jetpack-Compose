@@ -1,4 +1,4 @@
-package com.nnamanistephen.meditationapp.Screen.home
+package com.nnamanistephen.meditationapp.presentation.screens.home
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween

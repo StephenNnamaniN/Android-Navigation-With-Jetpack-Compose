@@ -1,4 +1,4 @@
-package com.nnamanistephen.meditationapp.Screen.settings
+package com.nnamanistephen.meditationapp.presentation.screens.about
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -7,21 +7,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.nnamanistephen.meditationapp.component.BottomNavigationBar
-import com.nnamanistephen.meditationapp.component.FABTab
-import com.nnamanistephen.meditationapp.component.GeneralTopBar
+import com.nnamanistephen.meditationapp.presentation.component.BottomNavigationBar
+import com.nnamanistephen.meditationapp.presentation.component.GeneralTopBar
 
 @Composable
-fun SettingsScreen(navController: NavController){
+fun AboutScreen(navController: NavController){
     Scaffold(topBar = {
-        GeneralTopBar(title = "Settings", navController = navController)
+        GeneralTopBar(title = "About Us", navController = navController)
     },
         bottomBar = {
             BottomNavigationBar(navController = navController)
         }) {innerPadding ->
         //Main content goes here
         Surface(modifier = Modifier.padding(innerPadding)) {
-            Text(text = "Let's setup...")
+            Text(text = "Learn about us...")
         }
     }
 }
